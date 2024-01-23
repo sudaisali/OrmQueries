@@ -18,6 +18,7 @@ const {CustomermadePayments} = require('../controller/product')
 const {EmployeeandOffice} = require('../controller/product') 
 const {ProductLineandPayment} = require('../controller/product') 
 const {updatePrices} = require('../controller/product') 
+const {updatecreditLimit} = require('../controller/product') 
 
 
 router.get('/productinfo',productInfo)
@@ -38,6 +39,7 @@ router.get('/CustomermadePayments',CustomermadePayments)
 router.get('/EmployeeandOffice',EmployeeandOffice)
 router.get('/ProductLineandPayment',ProductLineandPayment)
 router.get('/updatePrices',updatePrices)
+router.get('/updatecreditLimit',updatecreditLimit)
 
 
 

@@ -40,13 +40,11 @@ async function customerOrder(req, res) {
       const page = parseInt(req.query.page) || 1;
       const pageLimit = 10;
       const totalCount = await Order.count();
-      
       const productData = await Order.findAll({
           attributes: [
               'customerNumber',
               [Sequelize.fn('COUNT', Sequelize.col('customerNumber')), 'TotalOrders']
           ],
-          group: ['customerNumber'],
           order: [[Sequelize.literal('TotalOrders'), 'DESC']],
           offset: (page - 1) * pageLimit,
           limit: pageLimit
@@ -69,7 +67,6 @@ async function customerOrder(req, res) {
 async function customerTotalPayment(req, res) {
   try {
     
-
       const result = await Customer.findAll({
           attributes: [
               'customerNumber',[Sequelize.fn('SUM', Sequelize.col('Payments.amount')), 'totalPayment']
@@ -92,8 +89,8 @@ async function customerTotalPayment(req, res) {
         const page = parseInt(req.query.page) || 1;
         const pageLimit = 10;
         const totalPages = Math.ceil(totalCount / pageLimit);
-        const nextPage = page < totalPages ? `api/productNameandOrderedNo?page=${page + 1}` : null;
-        const prevPage = page > 1 ? `api/productNameandOrderedNo?page=${page - 1}` : null;
+        const nextPage = page < totalPages ? `api/customerTotalPayment?page=${page + 1}` : null;
+        const prevPage = page > 1 ? `api/customerTotalPayment?page=${page - 1}` : null;
 
         const paginatedResult = result.slice((page - 1) * pageLimit, page * pageLimit);
 
@@ -283,8 +280,8 @@ const orderandorderdetails = async(req,res)=>{
       const page = parseInt(req.query.page) || 1;
       const pageLimit = 10;
       const totalPages = Math.ceil(totalCount / pageLimit);
-      const nextPage = page < totalPages ? `api/getAveragePaymentAmount?page=${page + 1}` : null;
-      const prevPage = page > 1 ? `api/getAveragePaymentAmount?page=${page - 1}` : null;
+      const nextPage = page < totalPages ? `api/orderandorderdetails?page=${page + 1}` : null;
+      const prevPage = page > 1 ? `api/orderandorderdetails?page=${page - 1}` : null;
 
       const paginatedResult = result.slice((page - 1) * pageLimit, page * pageLimit);
 
@@ -328,8 +325,10 @@ const getUsaemployeesWithCustomer = async(req,res)=>{
       const page = parseInt(req.query.page) || 1;
       const pageLimit = 10;
       const totalPages = Math.ceil(totalCount / pageLimit);
-      const nextPage = page < totalPages ? `api/getAveragePaymentAmount?page=${page + 1}` : null;
-      const prevPage = page > 1 ? `api/getAveragePaymentAmount?page=${page - 1}` : null;
+      const nextPage = page < totalPages ? `api/const getUsaemployeesWithCustomer = async(req,res)=>{
+        ?page=${page + 1}` : null;
+      const prevPage = page > 1 ? `api/const getUsaemployeesWithCustomer = async(req,res)=>{
+        ?page=${page - 1}` : null;
 
       const paginatedResult = result.slice((page - 1) * pageLimit, page * pageLimit);
 
@@ -438,12 +437,12 @@ const customerwhoplaceorder = async(req,res)=>{
             {
                 model: Order,
                 attributes: [],
-                required: true, // INNER JOIN
+                required: true, 
             },
             {
                 model: Payment,
                 attributes: [],
-                required: true, // INNER JOIN
+                required: true, 
             }
         ],
         order: ['customerName']
@@ -459,8 +458,8 @@ const customerwhoplaceorder = async(req,res)=>{
       const page = parseInt(req.query.page) || 1;
       const pageLimit = 10;
       const totalPages = Math.ceil(totalCount / pageLimit);
-      const nextPage = page < totalPages ? `api/productOrderedByUsaCustomers?page=${page + 1}` : null;
-      const prevPage = page > 1 ? `api/productOrderedByUsaCustomers?page=${page - 1}` : null;
+      const nextPage = page < totalPages ? `api/customerwhoplaceorder?page=${page + 1}` : null;
+      const prevPage = page > 1 ? `api/customerwhoplaceorder?page=${page - 1}` : null;
       const paginatedResult = result.slice((page - 1) * pageLimit, page * pageLimit);
 
       handleSuccessResponse(res, paginatedResult, totalCount, totalPages, page, nextPage, prevPage);
@@ -527,8 +526,8 @@ const ProductandProductLine = async(req,res)=>{
       const page = parseInt(req.query.page) || 1;
       const pageLimit = 10;
       const totalPages = Math.ceil(totalCount / pageLimit);
-      const nextPage = page < totalPages ? `api/EmployeesAssosiatedWithCustomer?page=${page + 1}` : null;
-      const prevPage = page > 1 ? `api/EmployeesAssosiatedWithCustomer?page=${page - 1}` : null;
+      const nextPage = page < totalPages ? `api/ProductandProductLine?page=${page + 1}` : null;
+      const prevPage = page > 1 ? `api/ProductandProductLine?page=${page - 1}` : null;
       const paginatedResult = result.slice((page - 1) * pageLimit, page * pageLimit);
 
       handleSuccessResponse(res, paginatedResult, totalCount, totalPages, page, nextPage, prevPage);
@@ -589,8 +588,8 @@ const EmployeeandOffice = async(req,res)=>{
       const page = parseInt(req.query.page) || 1;
       const pageLimit = 10;
       const totalPages = Math.ceil(totalCount / pageLimit);
-      const nextPage = page < totalPages ? `api/CustomermadePayments?page=${page + 1}` : null;
-      const prevPage = page > 1 ? `api/CustomermadePayments?page=${page - 1}` : null;
+      const nextPage = page < totalPages ? `api/EmployeeandOffice?page=${page + 1}` : null;
+      const prevPage = page > 1 ? `api/EmployeeandOffice?page=${page - 1}` : null;
       const paginatedResult = result.slice((page - 1) * pageLimit, page * pageLimit);
 
       handleSuccessResponse(res, paginatedResult, totalCount, totalPages, page, nextPage, prevPage);
@@ -630,8 +629,8 @@ const ProductLineandPayment = async(req,res)=>{
       const page = parseInt(req.query.page) || 1;
       const pageLimit = 10;
       const totalPages = Math.ceil(totalCount / pageLimit);
-      const nextPage = page < totalPages ? `api/CustomermadePayments?page=${page + 1}` : null;
-      const prevPage = page > 1 ? `api/CustomermadePayments?page=${page - 1}` : null;
+      const nextPage = page < totalPages ? `api/ProductLineandPayment?page=${page + 1}` : null;
+      const prevPage = page > 1 ? `api/ProductLineandPayment?page=${page - 1}` : null;
       const paginatedResult = result.slice((page - 1) * pageLimit, page * pageLimit);
 
       handleSuccessResponse(res, paginatedResult, totalCount, totalPages, page, nextPage, prevPage);
@@ -666,76 +665,45 @@ const updatePrices = async (req,res) => {
     }
   };
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  const updatecreditLimit =async (req,res)=>{
+    try{
+      const subquery = await Payment.findAll({
+        attributes: [
+          'customerNumber',
+          [Sequelize.fn('SUM', Sequelize.col('amount')), 'total_amount'],
+        ],
+        include: [{
+          model: Customer,
+          attributes: [],
+          required: true,
+        }],
+        group: ['customerNumber'],
+      });
+      for (const paymentTotal of subquery) {
+        const customerNumber = paymentTotal.getDataValue('customerNumber');
+        const totalAmount = paymentTotal.getDataValue('total_amount');
+        const customer = await Customer.findByPk(customerNumber);
+        if (customer) {
+          let updatedCreditLimit;
+          if (totalAmount > 1000) {
+            updatedCreditLimit = Math.round(customer.creditLimit * 1.1);
+          } else {
+            updatedCreditLimit = Math.min(customer.creditLimit, 50000);
+          }
+          await customer.update({ creditLimit: updatedCreditLimit });
+        }
+      }
+        res.status(200).json({
+          message:"Credit Limit Updated SuccessFully"
+        })
+    }catch(error){
+     res.status(400).json({
+      message:error.message
+     })
+    }
+   
+    
+  }
 
 
 
@@ -770,4 +738,4 @@ module.exports = { productInfo , customerOrder  , customerTotalPayment ,
     productNameandOrderedNo , getEmployeesWithoutCustomers,getCustomersWithOrderCount ,
     getAveragePaymentAmount , orderandorderdetails,getUsaemployeesWithCustomer,productOrderedByUsaCustomers,
     getTotalRevenueByProductLine , customerwhoplaceorder , EmployeesAssosiatedWithCustomer,
-    ProductandProductLine , CustomermadePayments,EmployeeandOffice,ProductLineandPayment,updatePrices}
+    ProductandProductLine , CustomermadePayments,EmployeeandOffice,ProductLineandPayment,updatePrices,updatecreditLimit}
